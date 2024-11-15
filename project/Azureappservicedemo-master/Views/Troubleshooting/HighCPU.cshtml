@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "High CPU";
+}
+<script type="text/javascript">
+    function GetTimeZoneOffset() {
+
+        var dot = ".";
+       
+    }
+
+</script>
+<h1>High CPU</h1>
+
+
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                CPU Drill Down detector
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <h3> Verify the process that consumes high CPU : use CPU drill down detector </h3>
+                <img src="~/images/CPUDrillDown.png" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Collect Memory dump using Proactive CPU Monitoring
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <h3> Enable Proactive CPU Monitoring to collect a memory dump o crash</h3>
+                <img src="~/images/ProactiveCPUMonitoring.png" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Memory dump analysis
+            </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <br /> First thing we always check in the dump is the CLR version and establish if we are in a supported scenario.
+                <br /> <img src="~/images/DA_HighCPU_01.png" class="img-fluid">
+                <br /> Show thread pool status (threads running or not) + CPU usage. That is CPU usage on entire machine. It's not a must that w3wp.exe is taking all that CPU.
+                <br /> <img src="~/images/DA_HighCPU_02.png" class="img-fluid">
+                <br /> Looking at threads that are doing work:
+                <br /> <img src="~/images/DA_HighCPU_03.png" class="img-fluid">
+                <br /> Seems like all threads that are doing work are doing file operations, except threads 51. Let's have a closer look:
+                <br /> <img src="~/images/DA_HighCPU_04.png" class="img-fluid">
+                <br /> String concatenation, expensive operation CPU wise. Looking at the code:
+                <br /> <img src="~/images/DA_HighCPU_05.png" class="img-fluid">
+
+            </div>
+        </div>
+    </div>
+</div>

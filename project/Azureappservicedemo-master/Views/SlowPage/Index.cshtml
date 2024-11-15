@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Slow Page";
+}
+<script type="text/javascript">
+    function GetTimeZoneOffset() {
+
+        var dot = ".";
+       
+    }
+
+    function radu() {
+        fetch("https://ratanas.net/SlowPage.aspx?time=30000", {
+            method: "GET" // default, so we can ignore
+        })
+    }
+
+</script>
+@* <input type="button" value="Slow Call Javascript" onclick="radu();"> *@
+<h1>Slow Page</h1>
+<p>You can pass the time taken in ms for the request in the url SlowPage/Index/time=30000</p>
+<h1>Time Taken:</h1>
+<h1>@ViewData["TimeTaken"]</h1>
+
+
+<p>You can click the Slow Request button to reproduce a slow request </p>
+<a href="@Url.Action("Index","SlowPage",new {id="time=5000" })" class="btn btn-primary btn-lg">Slow Request </a>
+
+
+<p>You can check the troubleshooting steps to find out the root cause for slowness</p>
+
+<a href="@Url.Action("SlowRequest","Troubleshooting")" class="btn btn-primary btn-lg">How to Troubleshoot Slow request </a>
+
+
